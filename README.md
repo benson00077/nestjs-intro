@@ -23,8 +23,11 @@
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
 ## Note 
+
+### Learning Materials 
 - [x] [Crash Course - First taste](https://youtu.be/F_oOtaxb0L8)
-- [ ] [Crash Course - w/ MongoDB](https://www.youtube.com/watch?v=ulfU5vY6I78)
+- [x] [Crash Course - w/ MongoDB](https://www.youtube.com/watch?v=ulfU5vY6I78)
+- [x] [Crash Course - mongoose](https://www.youtube.com/watch?v=DZBGEVgL2eE&ab_channel=WebDevSimplified) -- my [notes](https://github.com/benson00077/devcamper_api#mongoose)
 
 | notion        | note                                               |
 | ------------- | -------------------------------------------------- |
@@ -32,14 +35,23 @@
 | ㄴ Contorller | handling incoming requests and returning responses |
 | ㄴ Provider   | service you provide, called by controller          |
 | ㄴ Model      | as a class property                                |
+| ㄴ ❓imports   |                                                    |
+| ❓Interceptors | @injectable()                                      |
 
-- coding strategy 
+### Coding strategy 
   1. Write method in `Controller` (.controller.ts) 🡪 `What`'s the req and res 
   2. Write method in `Provider` (.service.ts) 🡪 `How` to impliment the logic like how to process datas from db and return them.
 
+### Decorator
+- Decorator Factory -- when use, pass in para `@Logger('hi')`, which return decorator categorized as below 4 
+    - Class decorator
+    - Method decorator
+    - Property decorator
+    - Parameter decorator
+
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Playing around with [Nest](https://github.com/nestjs/nest) framework
 
 ## Installation
 
@@ -72,17 +84,3 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
