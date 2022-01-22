@@ -1,8 +1,10 @@
 import { Injectable } from '@nestjs/common';
 
-import { parse, DotenvParseOutput } from 'dotenv';
+import { parse } from 'dotenv';
 import { readFileSync } from 'fs';
 import * as Joi from 'joi';
+
+// TODO: Implement env APP_PORT (default 3001) logic
 
 export type EnvConfig = Record<string, any>;
 

@@ -3,6 +3,8 @@ import { InjectModel } from '@nestjs/mongoose';
 // gql model
 import { Post } from './models/post.model';
 import { Posts } from './models/posts.model';
+import { Tags } from './models/tags.model';
+import { BatchDeleteModel } from 'src/database/models/batch-delete.model';
 // type
 import { Model } from 'mongoose';
 import { PostDocument } from './schemas/posts.schema';
@@ -10,7 +12,6 @@ import { CreatePostInput } from './dtos/create-post.input';
 import { PaginationInput } from './dtos/pagination.input';
 import { ForbiddenError } from 'apollo-server-errors';
 import { UpdatePostInput } from './dtos/update-post.input';
-import { Tags } from './models/tags.model';
 
 @Injectable()
 export class PostsService {
@@ -102,8 +103,15 @@ export class PostsService {
     return this.postModel.findByIdAndDelete(id);
   }
 
-  public async batchDelte(ids: string[]) {
-    //TODO
+  public async batchDelte(ids: string[]): Promise<BatchDeleteModel> {
+    const res = await this.postModel.deleteMany({
+      _id: { $in: ids },
+    })
+
+    return {
+      ...res,
+      ids,
+    }
   }
 
   public async updatePV(id: string): Promise<Post> {

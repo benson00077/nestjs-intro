@@ -3,11 +3,12 @@ import { PostsService } from './posts.service';
 // gql model
 import { Post } from './models/post.model';
 import { Posts } from './models/posts.model';
+import { Tags } from './models/tags.model';
+import { BatchDeleteModel } from 'src/database/models/batch-delete.model';
 // type
 import { CreatePostInput } from './dtos/create-post.input';
 import { PaginationInput } from './dtos/pagination.input';
 import { UpdatePostInput } from './dtos/update-post.input';
-import { Tags } from './models/tags.model';
 
 @Resolver(of => Post)
 export class PostsResolver {
@@ -41,22 +42,23 @@ export class PostsResolver {
   }
 
   @Mutation(() => Post) 
-  public async deletePostById(@Args({name: 'id', type: () => ID}) id: string) {
+  public async deletePostById(@Args({ name: 'id', type: () => ID }) id: string) {
     return this.postsService.delteOneById(id)
   }
 
-  @Mutation(() => Post)
-  public async deletePosts() {
-    // TODO: batch delete
+  @Mutation(() => BatchDeleteModel)
+  //TODO: UseGuard(JwtAuthGuard)
+  public async deletePosts(@Args({ name: 'ids', type: () => [ID] }) ids: string[]) {
+    return this.postsService.batchDelte(ids)
   }
 
   @Mutation(() => Post)
-  public async updatePV(@Args({ name: 'id', type: () => ID}) id: string) {
+  public async updatePV(@Args({ name: 'id', type: () => ID }) id: string) {
     return this.postsService.updatePV(id)
   }
 
   @Mutation(() => Post)
-  public async updateLike(@Args({ name: 'id', type: () => ID}) id: string) {
+  public async updateLike(@Args({ name: 'id', type: () => ID }) id: string) {
     return this.postsService.updateLike(id)
   }
 

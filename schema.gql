@@ -35,6 +35,13 @@ type Tags {
   tags: [String!]!
 }
 
+type BatchDeleteModel {
+  ok: Float
+  n: Float
+  deletedCount: Float
+  ids: [ID!]!
+}
+
 type Query {
   posts(input: PaginationInput!): Posts!
   getPosts(input: PaginationInput!): Posts!
@@ -53,7 +60,7 @@ type Mutation {
   createPost(input: CreatePostInput!): Post!
   updatePostById(input: UpdatePostInput!): Post!
   deletePostById(id: ID!): Post!
-  deletePosts: Post!
+  deletePosts(ids: [ID!]!): BatchDeleteModel!
   updatePV(id: ID!): Post!
   updateLike(id: ID!): Post!
   getTopPVPosts(limit: Int!): Post!

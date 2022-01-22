@@ -34,6 +34,8 @@
 ```
 
 #### Mutation
+
+##### Mutation by input
 ###### createPost w/ success
 ```gql
   mutation {
@@ -70,7 +72,6 @@ mutation {
   }
 }
 
-
 #response
 {
   "errors": [
@@ -78,5 +79,49 @@ mutation {
       "message": "posterUrl must be an URL address; title must be shorter than or equal to 20 characters",
     }
   ]
+}
+```
+
+##### Mutation by id
+###### updateLike
+```gql
+mutation {
+  updateLike(id: "some-id") {
+    _id
+    like
+  }
+}
+
+#response
+{
+  "data": {
+    "updateLike": {
+      "_id": "some-id",
+      "like": 1,
+    }
+  }
+}
+```
+
+###### deletePosts
+```gql
+mutation {
+	deletePosts(ids: ["fakeID", "UncorrectID"]) {
+    ids
+    deletedCount
+  } 
+}
+
+#response
+{
+  "data": {
+    "deletePosts": {
+      "ids": [
+        "fakeID",
+        "UncorrectID"
+      ],
+      "deletedCount": 0
+    }
+  }
 }
 ```
