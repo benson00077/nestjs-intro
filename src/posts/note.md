@@ -3,6 +3,7 @@
 1. No `Controller` to handle req, res.
 2. Define `Provider` : `resolver` (.resolver.ts) 🡪 for gql and invoke fn from service, just like you define `controller`(.controller.ts) in the beginning if building a restful api.
 3. Define `Provider` : `service` (.service.ts) 🡪 handle mongodb by mongoose instance (./schemas/posts.schema.ts)
+4. Throw Exception: `class-validator` see [docs](https://docs.nestjs.com/pipes#class-validator)
 
 ## GQL exapmles
     see http://localhost:3000/graphql
@@ -33,6 +34,7 @@
 ```
 
 #### Mutation
+###### createPost w/ success
 ```gql
   mutation {
     createPost( 
@@ -49,4 +51,32 @@
       title
     }
   }
+```
+###### createPost w/ bad input
+```gql
+mutation {
+  createPost (
+    input : {
+			posterUrl: "000000000",  # not valid URL
+      title: "11- test for invalide URL", # should shorter than 20
+      summary: "summary of sth",
+      content: "dummy content",
+      tags: ["validate", "custom", "global"],
+      lastModifiedDate: "2022-01-22"
+    }
+  ) {
+    _id
+    posterUrl
+  }
+}
+
+
+#response
+{
+  "errors": [
+    {
+      "message": "posterUrl must be an URL address; title must be shorter than or equal to 20 characters",
+    }
+  ]
+}
 ```
