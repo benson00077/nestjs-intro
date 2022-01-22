@@ -33,8 +33,6 @@ export class GraphQLValidation implements PipeTransform<any> {
 
   private toValidate(metatype: Function): boolean {
     const types: Function[] = [String, Boolean, Number, Array, Object];
-    console.log(2, metatype)
-    console.log(3, !types.includes(metatype));
     return !types.includes(metatype)
   }
 }
