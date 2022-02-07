@@ -8,15 +8,17 @@ import { ConfigModule } from './config/config.module';
 import { DatabaseModule } from './database/database.module';
 
 import { PostsModule } from './posts/posts.module';
+import { PostStatisticsModule } from 'post-statistics/post-statistics.module';
 
 @Module({
   imports: [
     ConfigModule,
     DatabaseModule,
     GraphQLModule.forRoot({
-      autoSchemaFile: 'schema.gql'
+      autoSchemaFile: 'schema.gql',
     }),
     PostsModule,
+    PostStatisticsModule,
     // ProductModule,
   ],
   controllers: [AppController],

@@ -42,11 +42,34 @@ type BatchDeleteModel {
   ids: [ID!]!
 }
 
+type PostStatisticsModel {
+  _id: String!
+  postId: String!
+  postName: String!
+  scenes: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type PostStatisticsGroupItemModel {
+  postId: String!
+  postName: String!
+  scenes: String!
+  operatedAt: DateTime!
+}
+
+type PostStatisticsGroupModel {
+  _id: String!
+  count: Float!
+  items: [PostStatisticsGroupItemModel!]!
+}
+
 type Query {
   posts(input: PaginationInput!): Posts!
   getPosts(input: PaginationInput!): Posts!
   getPostById(id: ID!): Post!
   getAllTags: Tags!
+  getPostStatistics: [PostStatisticsGroupModel!]!
 }
 
 input PaginationInput {
@@ -65,6 +88,7 @@ type Mutation {
   updateLike(id: ID!): Post!
   getTopPVPosts(limit: Int!): Post!
   getTopLikePosts(limit: Int!): Post!
+  createPostStatistics(input: CreatePostStatisticsInput!): PostStatisticsModel!
 }
 
 input CreatePostInput {
@@ -88,4 +112,10 @@ input UpdatePostInput {
   pv: Float
   lastModifiedDate: DateTime
   isPublic: Boolean
+}
+
+input CreatePostStatisticsInput {
+  postId: String!
+  postName: String!
+  scenes: String!
 }

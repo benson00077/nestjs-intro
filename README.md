@@ -49,6 +49,12 @@
     - Property decorator
     - Parameter decorator
 
+### keywords
+- Auth: JWT and base64
+- Auth: Session and Cookie and passport.js 
+- DTO:  Graphql and class-validator.js
+- Mongo: aggregate
+
 ## Description
 
 Playing around with [Nest](https://github.com/nestjs/nest) framework
