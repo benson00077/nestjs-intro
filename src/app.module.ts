@@ -9,6 +9,9 @@ import { DatabaseModule } from './database/database.module';
 
 import { PostsModule } from './posts/posts.module';
 import { PostStatisticsModule } from 'post-statistics/post-statistics.module';
+import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
+
 
 @Module({
   imports: [
@@ -19,6 +22,8 @@ import { PostStatisticsModule } from 'post-statistics/post-statistics.module';
     }),
     PostsModule,
     PostStatisticsModule,
+    UserModule,
+    AuthModule,
     // ProductModule,
   ],
   controllers: [AppController],

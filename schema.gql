@@ -64,6 +64,14 @@ type PostStatisticsGroupModel {
   items: [PostStatisticsGroupItemModel!]!
 }
 
+type UserModel {
+  _id: ID!
+  email: String!
+  username: String!
+  password: String!
+  role: Float!
+}
+
 type Query {
   posts(input: PaginationInput!): Posts!
   getPosts(input: PaginationInput!): Posts!
@@ -89,6 +97,7 @@ type Mutation {
   getTopPVPosts(limit: Int!): Post!
   getTopLikePosts(limit: Int!): Post!
   createPostStatistics(input: CreatePostStatisticsInput!): PostStatisticsModel!
+  register(input: RegisterInput!): UserModel!
 }
 
 input CreatePostInput {
@@ -118,4 +127,10 @@ input CreatePostStatisticsInput {
   postId: String!
   postName: String!
   scenes: String!
+}
+
+input RegisterInput {
+  email: String!
+  username: String!
+  password: String!
 }
