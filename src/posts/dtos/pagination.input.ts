@@ -1,21 +1,21 @@
-import { InputType, Field } from '@nestjs/graphql'
-import { IsNotEmpty, IsNumber } from 'class-validator'
+import { InputType, Field } from '@nestjs/graphql';
+import { IsNotEmpty, IsNumber } from 'class-validator';
 
 @InputType()
 export class PaginationInput {
   @Field()
   @IsNumber()
   @IsNotEmpty()
-  public readonly page: number
+  public readonly page: number;
 
   @Field()
   @IsNumber()
   @IsNotEmpty()
-  public readonly pageSize: number
+  public readonly pageSize: number;
 
   @Field({ nullable: true })
-  public readonly title?: string
+  public readonly title?: string;
 
   @Field({ nullable: true })
-  public readonly tag?: string
+  public readonly tag?: string;
 }

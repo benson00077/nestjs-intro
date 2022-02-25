@@ -10,14 +10,13 @@ export type EnvConfig = Record<string, any>;
 
 @Injectable()
 export class ConfigService {
-
   public readonly envConfig: EnvConfig;
 
-  public readonly isEnvProduction: boolean
+  public readonly isEnvProduction: boolean;
 
-  public readonly isEnvDevelopment: boolean
+  public readonly isEnvDevelopment: boolean;
 
-  public readonly isEnvTest: boolean
+  public readonly isEnvTest: boolean;
 
   constructor(envPath: string) {
     const _config = parse(readFileSync(envPath));
@@ -31,25 +30,25 @@ export class ConfigService {
     const config = { ..._config, ...__config };
 
     this.envConfig = this.validateEnvFile(config);
-    this.isEnvProduction = this.getNodeEnv() === 'production'
-    this.isEnvDevelopment = this.getNodeEnv() === 'development'
-    this.isEnvTest = this.getNodeEnv() === 'test'
+    this.isEnvProduction = this.getNodeEnv() === 'production';
+    this.isEnvDevelopment = this.getNodeEnv() === 'development';
+    this.isEnvTest = this.getNodeEnv() === 'test';
   }
 
-  public getNodeEnv(): string  {
-    return this.get('NODE_ENV')
+  public getNodeEnv(): string {
+    return this.get('NODE_ENV');
   }
 
   public getMongoURI() {
     // mongodb+srv://<username>:<password>@cluster0.tfxvt.mongodb.net/nestjs-intro?retryWrites=true&w=majority
-    const userName = this.get('DATABASE_USER')
-    const userPwd = this.get('DATABASE_PWD')
-    const prefix = 'mongodb+srv://'
-    const auth = `${userName}:${userPwd}`
-    const host = this.get('DATABASE_HOST')
-    const collection = this.get('DATABASE_COLLECTION')
+    const userName = this.get('DATABASE_USER');
+    const userPwd = this.get('DATABASE_PWD');
+    const prefix = 'mongodb+srv://';
+    const auth = `${userName}:${userPwd}`;
+    const host = this.get('DATABASE_HOST');
+    const collection = this.get('DATABASE_COLLECTION');
 
-    return `${prefix}${auth}@${host}/${collection}?retryWrites=true&w=majority`
+    return `${prefix}${auth}@${host}/${collection}?retryWrites=true&w=majority`;
   }
 
   private validateEnvFile(envConfig: EnvConfig): EnvConfig {
@@ -61,16 +60,20 @@ export class ConfigService {
       APP_PORT: Joi.number().default(3001).required(),
       DATABASE_HOST: Joi.string().required(),
       DATABASE_COLLECTION: Joi.string().required(),
-      DATABASE_USER: this.isEnvProduction ? Joi.string().required() : Joi.string().optional(),
-      DATABASE_PWD: this.isEnvProduction ? Joi.string().required() : Joi.string().optional(),
-    })
+      DATABASE_USER: this.isEnvProduction
+        ? Joi.string().required()
+        : Joi.string().optional(),
+      DATABASE_PWD: this.isEnvProduction
+        ? Joi.string().required()
+        : Joi.string().optional(),
+    });
 
-    const { error, value } = envVarsSchema.validate(envConfig)
-    if (error) throw new Error(`Config validation error: ${error.message}`)
-    return value
+    const { error, value } = envVarsSchema.validate(envConfig);
+    if (error) throw new Error(`Config validation error: ${error.message}`);
+    return value;
   }
 
-  private get<T>(key:string): T {
-    return this.envConfig[key]
+  private get<T>(key: string): T {
+    return this.envConfig[key];
   }
 }

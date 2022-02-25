@@ -7,13 +7,12 @@ import { validate } from 'class-validator';
 // for class-validator library
 @Injectable()
 export class GraphQLValidation implements PipeTransform<any> {
-
   async transform(value: any, { metatype }: ArgumentMetadata) {
-    /** 
+    /**
      * metatype :
      * The class we defined in dto (e.g. src/posts/dtos/create-post.input.ts)
      * where we use the validation decorators from class-validator libarary
-     * */ 
+     * */
     if (!metatype || !this.toValidate(metatype)) return value;
 
     const object = plainToClass(metatype, value); // from literal obj to class obj/instance
@@ -23,16 +22,14 @@ export class GraphQLValidation implements PipeTransform<any> {
       const message = err
         .map((validationErr) => Object.values(validationErr.constraints))
         .flat()
-        .join('; ')
-      throw new UserInputError(message)
+        .join('; ');
+      throw new UserInputError(message);
     }
-    return value
+    return value;
   }
-
-
 
   private toValidate(metatype: Function): boolean {
     const types: Function[] = [String, Boolean, Number, Array, Object];
-    return !types.includes(metatype)
+    return !types.includes(metatype);
   }
 }

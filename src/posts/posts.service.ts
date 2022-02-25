@@ -106,12 +106,12 @@ export class PostsService {
   public async batchDelte(ids: string[]): Promise<BatchDeleteModel> {
     const res = await this.postModel.deleteMany({
       _id: { $in: ids },
-    })
+    });
 
     return {
       ...res,
       ids,
-    }
+    };
   }
 
   public async updatePV(id: string): Promise<Post> {
@@ -147,16 +147,15 @@ export class PostsService {
       { isPublic: { $ne: false } },
       { tags: 1 },
     );
-    const arr = []
-    posts.forEach(post => arr.push(...post.tags))
+    const arr = [];
+    posts.forEach((post) => arr.push(...post.tags));
 
     return {
-      tags: [...new Set(arr)]
-    }
+      tags: [...new Set(arr)],
+    };
   }
 
   public async archive() {
     //TODO
   }
-
 }

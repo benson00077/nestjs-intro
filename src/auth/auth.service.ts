@@ -16,19 +16,20 @@ export class AuthService {
     );
 
     if (curUserByEmail) {
-      throw new ForbiddenError('Email has already been used.')
+      throw new ForbiddenError('Email has already been used.');
     } else if (curUserByUserName) {
-      throw new ForbiddenError('UserName has already been used')
+      throw new ForbiddenError('UserName has already been used');
     } else {
-      const count = await this.userService.getUserCount()
-      const params = count === 0 ? { ...registerInput, role: Roles.SUPERUSER } : registerInput
-      const res = await this.userService.create({ ...params })
+      const count = await this.userService.getUserCount();
+      const params =
+        count === 0
+          ? { ...registerInput, role: Roles.SUPERUSER }
+          : registerInput;
+      const res = await this.userService.create({ ...params });
 
       //TODO: return generate JWT
-      console.log(res)
-      return res
+      console.log(res);
+      return res;
     }
-
-
   }
 }

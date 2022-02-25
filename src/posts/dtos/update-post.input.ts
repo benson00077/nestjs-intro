@@ -1,37 +1,37 @@
-import { InputType, Field } from '@nestjs/graphql'
-import { IsNotEmpty, IsUUID } from 'class-validator'
+import { InputType, Field } from '@nestjs/graphql';
+import { IsNotEmpty, IsUUID } from 'class-validator';
 
 @InputType()
 export class UpdatePostInput {
   @Field()
   @IsUUID()
   @IsNotEmpty()
-  public readonly id: string
+  public readonly id: string;
 
   @Field({ nullable: true })
-  public readonly posterUrl?: string
+  public readonly posterUrl?: string;
 
   @Field({ nullable: true })
-  public readonly title?: string
+  public readonly title?: string;
 
   @Field({ nullable: true })
-  public readonly summary?: string
+  public readonly summary?: string;
 
   @Field({ nullable: true })
-  public readonly content?: string
+  public readonly content?: string;
 
   @Field(() => [String], { nullable: true })
-  public readonly tags?: string[]
+  public readonly tags?: string[];
 
   @Field({ nullable: true })
-  public readonly like?: number
+  public readonly like?: number;
 
   @Field({ nullable: true })
-  public readonly pv?: number
+  public readonly pv?: number;
 
   @Field({ nullable: true })
-  public readonly lastModifiedDate?: Date
+  public readonly lastModifiedDate?: Date;
 
   @Field({ nullable: true })
-  public readonly isPublic?: boolean
+  public readonly isPublic?: boolean;
 }

@@ -9,6 +9,6 @@ export class AuthResolver {
 
   @Mutation(() => UserModel)
   public async register(@Args('input') input: RegisterInput) {
-    return this.authService.register(input)
+    return this.authService.register(input);
   }
 }
