@@ -14,6 +14,10 @@ export interface UserDocument extends mongoose.Document {
   readonly username: string;
   password: string;
   readonly role: Roles;
+  createdAt: Date
+  updatedAt: Date
+  // TODO: check -- args have 2, but UserSchema.methods.isValidPassword have 1
+  isValidPassword(password: string, hasehdPassword: string): boolean;
 }
 
 export const UserSchema = new mongoose.Schema(
@@ -36,6 +40,11 @@ UserSchema.pre<UserDocument>('save', function (next) {
 });
 
 // assign a function to the "methods" object of our UserSchema
-UserSchema.methods.isValidPassword = function (password: string) {
-  return validatePassword(password, this.password);
+// NOTICE: isValidPassword is not defined in user.service.ts, which is for communication w/ db. 
+UserSchema.methods.isValidPassword = function (
+  password: string,
+  hasehdPassword: string,
+) {
+  // this.password === hashedPassword
+  return validatePassword(password, hasehdPassword);
 };

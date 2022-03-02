@@ -70,6 +70,8 @@ type UserModel {
   username: String!
   password: String!
   role: Float!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 type Query {
@@ -78,6 +80,7 @@ type Query {
   getPostById(id: ID!): Post!
   getAllTags: Tags!
   getPostStatistics: [PostStatisticsGroupModel!]!
+  login(input: LoginInput!): UserModel!
 }
 
 input PaginationInput {
@@ -85,6 +88,11 @@ input PaginationInput {
   pageSize: Float!
   title: String
   tag: String
+}
+
+input LoginInput {
+  email: String!
+  password: String!
 }
 
 type Mutation {

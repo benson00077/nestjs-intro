@@ -16,4 +16,10 @@ export class UserModel {
 
   @Field()
   public readonly role: number;
+
+  @Field()
+  public readonly createdAt: Date;
+
+  @Field()
+  public readonly updatedAt: Date;
 }
