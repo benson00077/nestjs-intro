@@ -15,10 +15,10 @@ export const PostStatisticsSchema = new mongoose.Schema(
 );
 
 export interface PostStatisticsDocument extends mongoose.Document {
-  readonly _id: string
-  readonly postId: string
-  readonly postName: string
-  readonly scenes: string
-  readonly createdAt: Date
-  readonly updatedAt: Date
+  readonly _id: string;
+  readonly postId: string;
+  readonly postName: string;
+  readonly scenes: string;
+  readonly createdAt: Date;
+  readonly updatedAt: Date;
 }

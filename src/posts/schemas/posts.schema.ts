@@ -21,18 +21,18 @@ export const PostSchema = new mongoose.Schema(
 );
 
 export interface PostDocument extends mongoose.Document {
-  readonly _id: string
-  readonly posterUrl: string
-  readonly title: string
-  readonly summary: string
-  readonly content: string
-  readonly tags: string[]
-  readonly lastModifiedDate: Date
-  readonly like: number
-  readonly pv: number
-  readonly isPublic: boolean
-  readonly createdAt: Date
-  readonly updatedAt: Date
-  readonly prev: PostDocument | null
-  readonly next: PostDocument | null
+  readonly _id: string;
+  readonly posterUrl: string;
+  readonly title: string;
+  readonly summary: string;
+  readonly content: string;
+  readonly tags: string[];
+  readonly lastModifiedDate: Date;
+  readonly like: number;
+  readonly pv: number;
+  readonly isPublic: boolean;
+  readonly createdAt: Date;
+  readonly updatedAt: Date;
+  readonly prev: PostDocument | null;
+  readonly next: PostDocument | null;
 }

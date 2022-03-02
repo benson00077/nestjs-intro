@@ -9,7 +9,7 @@ import * as morgan from 'morgan';
 import helmet from 'helmet';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule)
+  const app = await NestFactory.create(AppModule);
 
   const { APP_PORT, NODE_ENV } = parse(readFileSync(`env/.env`));
   console.log("NODE_ENV is :", NODE_ENV);

@@ -5,7 +5,7 @@ import { ConfigService } from 'src/config/config.service';
 /**
  *  Async configuration :
  *  https://docs.nestjs.com/techniques/mongodb#async-configuration
- * 
+ *
  *  inject constant instance of ConfigService
  */
 @Module({
