@@ -12,6 +12,7 @@ export enum Roles {
 export interface UserDocument extends mongoose.Document {
   readonly _id: string;
   readonly username: string;
+  readonly email: string;
   password: string;
   readonly role: Roles;
   createdAt: Date
