@@ -5,6 +5,9 @@ export class UserModel {
   @Field(() => ID)
   public readonly _id: string;
 
+  @Field() 
+  public readonly access_token: string; // for jwt auth
+
   @Field()
   public readonly email: string;
 

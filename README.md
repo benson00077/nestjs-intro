@@ -24,6 +24,17 @@
 
 ## Note 
 
+### Usage
+
+##### JWT auth guard
+
+When access protected GQL query / mutation, that is only accesible after authentication, in GraphQL Playground add the http header as below:
+```bash
+{
+	"Authorization" : "Bearer <JWT>"
+}
+```
+
 ### Learning Materials 
 - [x] [Crash Course - First taste](https://youtu.be/F_oOtaxb0L8)
 - [x] [Crash Course - w/ MongoDB](https://www.youtube.com/watch?v=ulfU5vY6I78)

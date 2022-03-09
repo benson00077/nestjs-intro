@@ -66,6 +66,7 @@ type PostStatisticsGroupModel {
 
 type UserModel {
   _id: ID!
+  access_token: String!
   email: String!
   username: String!
   password: String!
@@ -106,6 +107,7 @@ type Mutation {
   getTopLikePosts(limit: Int!): Post!
   createPostStatistics(input: CreatePostStatisticsInput!): PostStatisticsModel!
   register(input: RegisterInput!): UserModel!
+  changePassword(input: ChangePasswordInput!): UserModel!
 }
 
 input CreatePostInput {
@@ -141,4 +143,9 @@ input RegisterInput {
   email: String!
   username: String!
   password: String!
+}
+
+input ChangePasswordInput {
+  oldPassword: String!
+  newPassword: String!
 }

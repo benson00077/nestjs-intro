@@ -1,7 +1,9 @@
 import { Injectable } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 import { AuthenticationError, ForbiddenError } from 'apollo-server-express';
 import { Roles, UserDocument } from 'src/user/schema/user.schema';
 import { UserService } from 'src/user/user.service';
+import { ChangePasswordInput } from './dtos/chage-password.input';
 import { LoginInput } from './dtos/login.input';
 import { RegisterInput } from './dtos/register.input';
 
@@ -62,5 +64,16 @@ export class AuthService {
       //TODO: return generate JWT
       return res;
     }
+  }
+
+  public async changePassword(input: ChangePasswordInput, token: string) {
+    const { oldPassword, newPassword } = input;
+
+
+    //TODO: decode jwt and communicate w/ db
+
+    const res = await this.userService.findOneByEmail('testEmail@com.tw')
+
+    return res
   }
 }
