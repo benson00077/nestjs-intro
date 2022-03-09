@@ -17,7 +17,6 @@ export interface UserDocument extends mongoose.Document {
   readonly role: Roles;
   createdAt: Date
   updatedAt: Date
-  // TODO: check -- args have 2, but UserSchema.methods.isValidPassword have 1
   isValidPassword(password: string, hasehdPassword: string): boolean;
 }
 

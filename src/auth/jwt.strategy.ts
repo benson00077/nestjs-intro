@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
+import { IPayload } from './interfaces/jwt.interface';
 
 // protecting endpoints by requiring a valid JWT 
 
@@ -15,7 +16,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  async validate(payload: any) {
+  async validate(payload: IPayload) {
     return { userId: payload.sub, email: payload.email };
   }
 }

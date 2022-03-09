@@ -31,7 +31,7 @@
 When access protected GQL query / mutation, that is only accesible after authentication, in GraphQL Playground add the http header as below:
 ```bash
 {
-	"Authorization" : "Bearer <JWT>"
+	"Authorization" : "Bearer <encodedJWT>"
 }
 ```
 
