@@ -1,5 +1,7 @@
 import { Resolver, Query, Args, Mutation, ID, Int } from '@nestjs/graphql';
 import { PostsService } from './posts.service';
+import { UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/shared/guard/GraphQLAuth.guard';
 // gql model
 import { Post } from './models/post.model';
 import { Posts } from './models/posts.model';
@@ -20,6 +22,7 @@ export class PostsResolver {
   }
 
   @Query(() => Posts)
+  @UseGuards(JwtAuthGuard)
   public async getPosts(@Args('input') input: PaginationInput) {
     return this.postsService.findByPagination(input);
   }
@@ -30,17 +33,20 @@ export class PostsResolver {
   }
 
   @Mutation((returns) => Post)
+  @UseGuards(JwtAuthGuard)
   public async createPost(@Args('input') input: CreatePostInput) {
     return this.postsService.create(input);
   }
 
   // TODO: Handle exception while wrong id input
   @Mutation((returns) => Post)
+  @UseGuards(JwtAuthGuard)
   public async updatePostById(@Args('input') input: UpdatePostInput) {
     return this.postsService.update(input);
   }
 
   @Mutation(() => Post)
+  @UseGuards(JwtAuthGuard)
   public async deletePostById(
     @Args({ name: 'id', type: () => ID }) id: string,
   ) {
@@ -48,7 +54,7 @@ export class PostsResolver {
   }
 
   @Mutation(() => BatchDeleteModel)
-  //TODO: UseGuard(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   public async deletePosts(
     @Args({ name: 'ids', type: () => [ID] }) ids: string[],
   ) {
