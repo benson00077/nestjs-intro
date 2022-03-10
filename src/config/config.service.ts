@@ -51,6 +51,14 @@ export class ConfigService {
     return `${prefix}${auth}@${host}/${collection}?retryWrites=true&w=majority`;
   }
 
+  public getJWTSecretKey(): string {
+    return this.get('JWT_SECRET_KEY');
+  }
+
+  public getJWTExpiresTime(): number {
+    return this.get('JWT_EXPIRES_TIME');
+  }
+
   private validateEnvFile(envConfig: EnvConfig): EnvConfig {
     const envVarsSchema = Joi.object({
       NODE_ENV: Joi.string()
@@ -66,6 +74,8 @@ export class ConfigService {
       DATABASE_PWD: this.isEnvProduction
         ? Joi.string().required()
         : Joi.string().optional(),
+      JWT_SECRET_KEY: Joi.string().required(),
+      JWT_EXPIRES_TIME: Joi.number().required(),
     });
 
     const { error, value } = envVarsSchema.validate(envConfig);

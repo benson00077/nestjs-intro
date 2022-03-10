@@ -22,23 +22,37 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Note 
+## Usage
 
-### Usage
+### Init
 
-##### JWT auth guard
+Follow [./env/example.env](/env/example.env) to define env variables. Make sure you have `.env`, `developmnet.env` and `production.env` files set up.
 
-When access protected GQL query / mutation, that is only accesible after authentication, in GraphQL Playground add the http header as below:
+
+Also, mongo db have different URI format by version. Our `.env` is following the second one. See more on [config.service.ts](./src/config/config.service.ts)
 ```bash
+# 1. mongodb://[username:password@]host1[:port1][,host2[:port2],...[,hostN[:portN]]][/[database][?options]]
+# 2. mongodb+srv://[username:password@]host[/[database][?options]]
+```
+
+### Test w/ JWT auth guard
+
+In GraphQL Playground add the http header as below, when testing protected GQL query / mutation, which is only accesible after authentication
+```json
 {
 	"Authorization" : "Bearer <encodedJWT>"
 }
 ```
 
+
+## Note 
+
+
 ### Learning Materials 
 - [x] [Crash Course - First taste](https://youtu.be/F_oOtaxb0L8)
 - [x] [Crash Course - w/ MongoDB](https://www.youtube.com/watch?v=ulfU5vY6I78)
 - [x] [Crash Course - mongoose](https://www.youtube.com/watch?v=DZBGEVgL2eE&ab_channel=WebDevSimplified) -- my [notes](https://github.com/benson00077/devcamper_api#mongoose)
+- [x] [Crash Course - Authentication](https://youtu.be/_L225zpUK0M)
 
 | notion        | note                                               |
 | ------------- | -------------------------------------------------- |
