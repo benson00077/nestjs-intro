@@ -34,14 +34,8 @@ export class UserService {
   /**
    *  For user module and auth module
    */
-  public updateUser(input: UpdateUserInput): Promise<UserDocument> {
+  public async updateUser(input: UpdateUserInput): Promise<UserDocument> {
     const { id, ...rest } = input;
-    const newUser = this.userModel.findByIdAndUpdate(id, rest, { new: true });
-    
-    console.log(123, "user.service.ts", newUser)
-    
-    // TODO: types
-    //@ts-ignore
-    return newUser;
+    return this.userModel.findByIdAndUpdate(id, rest, { new: true });    
   }
 }

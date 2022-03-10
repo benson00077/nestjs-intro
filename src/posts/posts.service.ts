@@ -116,7 +116,6 @@ export class PostsService {
 
   public async updatePV(id: string): Promise<Post> {
     const { pv } = await this.findOneById(id);
-    // TODO: make sure pv + 1 in int not str
     return this.postModel.findByIdAndUpdate(id, { pv: pv + 1 }, { new: true });
   }
 

@@ -11,7 +11,7 @@ export const PostSchema = new mongoose.Schema(
     tags: { type: Array, required: true },
     lastModifiedDate: { type: Date, required: true },
     like: { type: Number, default: 0, require: true },
-    pv: { type: String, default: 0, required: true },
+    pv: { type: Number, default: 0, required: true },
     isPublic: { type: Boolean, default: true, required: true },
   },
   {
