@@ -12,7 +12,7 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
   public async canActivate(context: ExecutionContext): Promise<boolean> {
     // TODO: env var, if TEST env then pass the jwt validation
 
-    console.log(`    Req going through JwtAuthGuard - Execute from Handler <${context.getHandler().name}> in Class <${context.getClass().name}>`)
+    console.log("\x1b[36m%s\x1b[0m", `    Req going through JwtAuthGuard - Execute from Handler <${context.getHandler().name}> in Class <${context.getClass().name}>`)
 
     //returning boolean, indicating whether the current request is allowed or not.
     return super.canActivate(context) as boolean; 
