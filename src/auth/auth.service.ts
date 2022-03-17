@@ -20,7 +20,7 @@ export class AuthService {
     const { password, ...rest } = res.toObject();
     const payload = { email, sub: res._id };
     return {
-      access_token: this.jwtService.sign(payload), // NOTICE: GQL not have this Field
+      access_token: this.jwtService.sign(payload),
       password: 'NOTICE: GQL have this Filed but I filter it out.',
       ...rest,
     };
@@ -63,8 +63,7 @@ export class AuthService {
           : registerInput;
       const res = await this.userService.create({ ...params });
 
-      //TODO: return generate JWT
-      return res;
+      return this.generateJWT(email, res);
     }
   }
 
