@@ -12,7 +12,7 @@ import { CreatePostInput } from './dtos/create-post.input';
 import { PaginationInput } from './dtos/pagination.input';
 import { UpdatePostInput } from './dtos/update-post.input';
 
-@Resolver((of) => Post)
+@Resolver(() => Post)
 export class PostsResolver {
   constructor(private postsService: PostsService) {}
 
@@ -32,14 +32,14 @@ export class PostsResolver {
     return this.postsService.findOneById(id);
   }
 
-  @Mutation((returns) => Post)
+  @Mutation(() => Post)
   @UseGuards(JwtAuthGuard)
   public async createPost(@Args('input') input: CreatePostInput) {
     return this.postsService.create(input);
   }
 
   // TODO: Handle exception while wrong id input
-  @Mutation((returns) => Post)
+  @Mutation(() => Post)
   @UseGuards(JwtAuthGuard)
   public async updatePostById(@Args('input') input: UpdatePostInput) {
     return this.postsService.update(input);

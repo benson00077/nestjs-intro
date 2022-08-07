@@ -12,11 +12,17 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const { APP_PORT, NODE_ENV } = parse(readFileSync(`env/.env`));
-  console.log("\x1b[36m%s\x1b[0m", "    NODE_ENV is :", NODE_ENV);
+  console.log('\x1b[36m%s\x1b[0m', '    NODE_ENV is :', NODE_ENV);
 
   app.use(favicon(path.join(process.cwd(), 'public/nebula.png')));
   // morgan for logging req,res
-  app.use(morgan(NODE_ENV === 'development' ? ':method :url :status :res[content-length] - :response-time ms - Referer :user-agent' : 'combined'))
+  app.use(
+    morgan(
+      NODE_ENV === 'development'
+        ? ':method :url :status :res[content-length] - :response-time ms - Referer :user-agent'
+        : 'combined',
+    ),
+  );
 
   app.use(
     // against XSS

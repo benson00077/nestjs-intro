@@ -9,7 +9,7 @@ import { RegisterInput } from './dtos/register.input';
 import { Request } from 'express';
 import { ReqDecorator } from 'src/shared/decorators/req.decorator';
 
-@Resolver((of) => UserModel)
+@Resolver(() => UserModel)
 export class AuthResolver {
   constructor(private readonly authService: AuthService) {}
 
@@ -25,7 +25,10 @@ export class AuthResolver {
 
   @Mutation(() => UserModel)
   @UseGuards(JwtAuthGuard)
-  public async changePassword(@Args('input') input: ChangePasswordInput, @ReqDecorator() req: Request) {
+  public async changePassword(
+    @Args('input') input: ChangePasswordInput,
+    @ReqDecorator() req: Request,
+  ) {
     return this.authService.changePassword(input, req.headers.authorization);
   }
 }

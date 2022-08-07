@@ -4,7 +4,7 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 import { ConfigService } from 'src/config/config.service';
 import { IPayload } from './interfaces/jwt.interface';
 
-// protecting endpoints by requiring a valid JWT 
+// protecting endpoints by requiring a valid JWT
 // docs: https://docs.nestjs.com/security/authentication#implementing-passport-jwt
 
 @Injectable()

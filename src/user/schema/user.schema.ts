@@ -15,8 +15,8 @@ export interface UserDocument extends mongoose.Document {
   readonly email: string;
   password: string;
   readonly role: Roles;
-  createdAt: Date
-  updatedAt: Date
+  createdAt: Date;
+  updatedAt: Date;
   isValidPassword(password: string, hasehdPassword: string): boolean;
 }
 
@@ -40,7 +40,7 @@ UserSchema.pre<UserDocument>('save', function (next) {
 });
 
 // assign a function to the "methods" object of our UserSchema
-// NOTICE: isValidPassword is not defined in user.service.ts, which is for communication w/ db. 
+// NOTICE: isValidPassword is not defined in user.service.ts, which is for communication w/ db.
 UserSchema.methods.isValidPassword = function (
   password: string,
   hasehdPassword: string,
