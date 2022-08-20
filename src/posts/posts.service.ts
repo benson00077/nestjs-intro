@@ -99,7 +99,7 @@ export class PostsService {
     return this.postModel.findByIdAndUpdate(id, rest, { new: true });
   }
 
-  public async delteOneById(id: string): Promise<Post> {
+  public async deleteOneById(id: string): Promise<Post> {
     return this.postModel.findByIdAndDelete(id);
   }
 

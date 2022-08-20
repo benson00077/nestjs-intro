@@ -1,12 +1,12 @@
 import { Resolver, Query, Args, Mutation, ID, Int } from '@nestjs/graphql';
 import { PostsService } from './posts.service';
 import { UseGuards } from '@nestjs/common';
-import { JwtAuthGuard } from 'src/shared/guard/GraphQLAuth.guard';
+import { JwtAuthGuard } from '../shared/guard/GraphQLAuth.guard';
 // gql model
 import { Post } from './models/post.model';
 import { Posts } from './models/posts.model';
 import { Tags } from './models/tags.model';
-import { BatchDeleteModel } from 'src/database/models/batch-delete.model';
+import { BatchDeleteModel } from '../database/models/batch-delete.model';
 // type
 import { CreatePostInput } from './dtos/create-post.input';
 import { PaginationInput } from './dtos/pagination.input';
@@ -50,7 +50,7 @@ export class PostsResolver {
   public async deletePostById(
     @Args({ name: 'id', type: () => ID }) id: string,
   ) {
-    return this.postsService.delteOneById(id);
+    return this.postsService.deleteOneById(id);
   }
 
   @Mutation(() => BatchDeleteModel)
