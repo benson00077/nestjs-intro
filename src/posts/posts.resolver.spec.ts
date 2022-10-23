@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { PostsResolver } from './posts.resolver';
-import { JwtAuthGuard } from '../shared/guard/GraphQLAuth.guard';
+import { JwtAuthGuard } from 'src/shared/guard/GraphQLAuth.guard';
 import { CanActivate } from '@nestjs/common';
 import { PostsService } from './posts.service';
 import { Post } from './models/post.model';
