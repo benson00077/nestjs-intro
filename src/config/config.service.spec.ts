@@ -10,8 +10,8 @@ const envTest = {
   JWT_SECRET_KEY: 'test-jwt-key',
   JWT_EXPIRES_TIME: 1004,
   DATABASE_USER: 'testUser',
-  DATABASE_PWD: 'testPwd'
-}
+  DATABASE_PWD: 'testPwd',
+};
 
 describe('ConfigService', () => {
   let service: ConfigService;
@@ -23,10 +23,11 @@ describe('ConfigService', () => {
         {
           provide: ConfigService,
           useValue: new ConfigService('env/test.env'),
-        }
+        },
       ],
-    }).useMocker((token) => console.log(token))
-    .compile();
+    })
+      .useMocker((token) => console.log(token))
+      .compile();
 
     service = moduleRef.get<ConfigService>(ConfigService);
   });
@@ -34,17 +35,17 @@ describe('ConfigService', () => {
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
-  
+
   it('should read env file from ./env/test.env', () => {
-    expect(service.getNodeEnv()).toEqual('test')
+    expect(service.getNodeEnv()).toEqual('test');
     expect(service.isEnvTest).toBeTruthy();
-  })
+  });
 
   it('should check evn file is valid', () => {
-    expect(service.envConfig).toEqual(envTest)
-  })
+    expect(service.envConfig).toEqual(envTest);
+  });
 
   it('should expose mongoDB URI', () => {
     expect(typeof service.getMongoURI()).toBe('string');
-  })
+  });
 });

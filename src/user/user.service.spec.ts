@@ -14,27 +14,24 @@ const mockUser = (id: string): UserModel => ({
   role: Roles.USER,
   createdAt: new Date(),
   updatedAt: new Date(),
-})
+});
 
 const ids = ['dummy1', 'dummy2', 'dummy3'];
 
-const mockUsersArr = ids.map(id => mockUser(id));
+const mockUsersArr = ids.map((id) => mockUser(id));
 
 const mockUserMongooseModel = {
   findOne: jest.fn().mockImplementation(({ email }) => {
-    const user = mockUsersArr.filter(user => user.email === email)[0];
-    return user
+    const user = mockUsersArr.filter((user) => user.email === email)[0];
+    return user;
   }),
   findByIdAndUpdate: jest
     .fn()
     .mockImplementation((id: string, rest: Partial<UpdateUserInput>) => {
-      const user = mockUsersArr.filter(user => user._id === id)[0];
-      return {...user, _id: id, password: rest.password}
-    })
-
+      const user = mockUsersArr.filter((user) => user._id === id)[0];
+      return { ...user, _id: id, password: rest.password };
+    }),
 };
-
-
 
 describe('UserService', () => {
   let service: UserService;
@@ -46,7 +43,7 @@ describe('UserService', () => {
         {
           provide: getModelToken('User'),
           useValue: mockUserMongooseModel,
-        }
+        },
       ],
     }).compile();
 
@@ -60,16 +57,16 @@ describe('UserService', () => {
   it('findOneByEmail() is defined', async () => {
     const user = await service.findOneByEmail(mockUsersArr[0].email);
     expect(user).toEqual(mockUsersArr[0]);
-  })
+  });
 
   it('updateUser() is defined', async () => {
     const { _id } = mockUsersArr[0];
-    const pwd = 'newPassword'
+    const pwd = 'newPassword';
     const updated = await service.updateUser({
       id: _id,
-      password: pwd
-    })
+      password: pwd,
+    });
     expect(updated._id).toBe(_id);
     expect(updated.password).toBe(pwd);
-  })
+  });
 });

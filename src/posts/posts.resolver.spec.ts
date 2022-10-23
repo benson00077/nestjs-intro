@@ -6,26 +6,30 @@ import { PostsService } from './posts.service';
 import { Post } from './models/post.model';
 import { ExternalExceptionFilterContext } from '@nestjs/core/exceptions/external-exception-filter-context';
 
-const mockDB = []
+const mockDB = [];
 const mockPostsService = {
   create: (input: Post) => {
-    const created = {...input, _id: 'uuid'}
-    mockDB.push(created)
-    return Promise.resolve(created)
+    const created = { ...input, _id: 'uuid' };
+    mockDB.push(created);
+    return Promise.resolve(created);
   },
-  deleteOneById(uuid: string){
-    let index: number
-    mockDB.forEach((p, i) => { if (p._id === uuid) index = i })
-    const removed = mockDB.splice(index, 1)[0]
-    return removed
-  }
-}
+  deleteOneById(uuid: string) {
+    let index: number;
+    mockDB.forEach((p, i) => {
+      if (p._id === uuid) index = i;
+    });
+    const removed = mockDB.splice(index, 1)[0];
+    return removed;
+  },
+};
 
 describe('PostsResolver', () => {
   let resolver: PostsResolver;
 
   beforeEach(async () => {
-    const mock_ForceFailGuard: CanActivate = { canActivate: jest.fn(() => true) }
+    const mock_ForceFailGuard: CanActivate = {
+      canActivate: jest.fn(() => true),
+    };
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         PostsResolver,
@@ -33,11 +37,11 @@ describe('PostsResolver', () => {
           provide: PostsService,
           useValue: mockPostsService,
         },
-      
       ],
     })
-    .overrideGuard(JwtAuthGuard).useValue(mock_ForceFailGuard)
-    .compile();
+      .overrideGuard(JwtAuthGuard)
+      .useValue(mock_ForceFailGuard)
+      .compile();
 
     resolver = module.get<PostsResolver>(PostsResolver);
   });
@@ -55,15 +59,14 @@ describe('PostsResolver', () => {
         content: 'crated content',
         tags: ['created', 'tags'],
         lastModifiedDate: new Date(),
-      })
-      expect(post).toHaveProperty('_id')
-    })
+      });
+      expect(post).toHaveProperty('_id');
+    });
 
-    it('deletePostById()', async() => {
-      const removed = await resolver.deletePostById('uuid')
-      expect(removed._id).toBe('uuid')
-      expect(mockDB.length).toBe(0)
-    })
-
-  })
+    it('deletePostById()', async () => {
+      const removed = await resolver.deletePostById('uuid');
+      expect(removed._id).toBe('uuid');
+      expect(mockDB.length).toBe(0);
+    });
+  });
 });

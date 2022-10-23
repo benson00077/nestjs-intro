@@ -59,29 +59,27 @@ const mockPostDocArr = [
 const mockPostMongooseModel = {
   new: jest.fn().mockResolvedValue(mockPost()),
   constructor: jest.fn().mockResolvedValue(mockPost()),
-  create: jest
-    .fn()
-    .mockImplementation((dto) => mockPostDoc({ ...dto })),
+  create: jest.fn().mockImplementation((dto) => mockPostDoc({ ...dto })),
   findByIdAndUpdate: jest
     .fn()
     .mockImplementation((id: string, rest: Partial<UpdatePostInput>) => {
-      let post = mockPostDocArr.filter((p) => p._id === id)[0]
-      for (let [key, value] of Object.entries(rest)) {
-        if(post[key]) post[key] = value
+      const post = mockPostDocArr.filter((p) => p._id === id)[0];
+      for (const [key, value] of Object.entries(rest)) {
+        if (post[key]) post[key] = value;
       }
-      return post
+      return post;
     }),
   findByIdAndDelete: jest
     .fn()
     .mockImplementation((id: string, rest: Partial<UpdatePostInput>) => {
-      let index: number
+      let index: number;
       mockPostDocArr.forEach((p, i) => {
-        if (p._id === id) index = i
-      })
-      const removed = mockPostDocArr.splice(index, 1)[0]
-      return removed
-    })
-}
+        if (p._id === id) index = i;
+      });
+      const removed = mockPostDocArr.splice(index, 1)[0];
+      return removed;
+    }),
+};
 
 describe('PostsService', () => {
   let service: PostsService;
@@ -124,7 +122,7 @@ describe('PostsService', () => {
 
   describe('should create one, update one, and delete one', () => {
     let postId = '';
-    let dbSize = mockPostDocArr.length
+    const dbSize = mockPostDocArr.length;
 
     it('create() and push to mock db', async () => {
       const post = await service.create({
@@ -141,22 +139,22 @@ describe('PostsService', () => {
     });
     it('update() update the post in mock db', async () => {
       const updatedPost = await service.update({
-        id: postId, 
-        ...mockPost(postId, 'updated.com', 'updated title')
-      })
-      expect(updatedPost.title).toBe('updated title')
-      expect(mockPostDocArr.length).toBe(dbSize + 1)
+        id: postId,
+        ...mockPost(postId, 'updated.com', 'updated title'),
+      });
+      expect(updatedPost.title).toBe('updated title');
+      expect(mockPostDocArr.length).toBe(dbSize + 1);
     });
     it('deleteOneById() delete the post from mock db', async () => {
-      const removedPost = await service.deleteOneById(postId) 
-      expect(removedPost.title).toBe('updated title')
-      expect(removedPost._id).toBe(postId)
-      expect(mockPostDocArr.length).toBe(dbSize)
-    })
+      const removedPost = await service.deleteOneById(postId);
+      expect(removedPost.title).toBe('updated title');
+      expect(removedPost._id).toBe(postId);
+      expect(mockPostDocArr.length).toBe(dbSize);
+    });
   });
 
   //TODO
-  it('shold updatePV', () => {})
-  it('shold updateLike', () => {})
-  it('shold getAllTags', () => {})
+  it('shold updatePV', () => {});
+  it('shold updateLike', () => {});
+  it('shold getAllTags', () => {});
 });
