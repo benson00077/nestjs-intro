@@ -1,3 +1,4 @@
+/* eslint-disable  @typescript-eslint/no-empty-function */
 import { JwtService } from '@nestjs/jwt';
 import { Test, TestingModule } from '@nestjs/testing';
 import { AuthenticationError, ForbiddenError } from 'apollo-server-express';

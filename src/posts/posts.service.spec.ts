@@ -1,3 +1,4 @@
+/* eslint-disable  @typescript-eslint/no-empty-function */
 import { getModelToken } from '@nestjs/mongoose';
 import { Test, TestingModule } from '@nestjs/testing';
 import { Model } from 'mongoose';
