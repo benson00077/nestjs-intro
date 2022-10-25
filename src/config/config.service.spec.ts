@@ -1,5 +1,4 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ConfigModule } from './config.module';
 import { ConfigService } from './config.service';
 
 const envTest = {
