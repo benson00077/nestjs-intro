@@ -31,7 +31,7 @@ async function bootstrap() {
       crossOriginEmbedderPolicy: false,
     }),
   );
-  app.enableCors({});
+  // app.enableCors({});
   app.useGlobalPipes(new GraphQLValidation());
   await app.listen(APP_PORT || 3001);
 }

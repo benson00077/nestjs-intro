@@ -22,9 +22,16 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Usage
+# 👉 Description
 
-### Init
+Try to fix bugs:
+- ✔️ client side fetch graphql api 
+- ❌ server side(SSG) FAIL to fetch graphql api
+- ❌ postman FAIL to fetch graphql api
+
+# 👉 Usage
+
+## Init
 
 Follow [./env/example.env](/env/example.env) to define env variables. Make sure you have `.env`, `developmnet.env` and `production.env` files set up.
 
@@ -35,7 +42,7 @@ Also, mongo db have different URI format by version. Our `.env` is following the
 # 2. mongodb+srv://[username:password@]host[/[database][?options]]
 ```
 
-### Test w/ JWT auth guard
+## Test w/ JWT auth guard
 
 In GraphQL Playground add the http header as below, when testing protected GQL query / mutation, which is only accesible after authentication
 ```json
@@ -45,10 +52,10 @@ In GraphQL Playground add the http header as below, when testing protected GQL q
 ```
 
 
-## Note 
+# Note 
 
 
-### Learning Materials 
+## Learning Materials 
 - [x] [Crash Course - First taste](https://youtu.be/F_oOtaxb0L8)
 - [x] [Crash Course - w/ MongoDB](https://www.youtube.com/watch?v=ulfU5vY6I78)
 - [x] [Crash Course - mongoose](https://www.youtube.com/watch?v=DZBGEVgL2eE&ab_channel=WebDevSimplified) -- my [notes](https://github.com/benson00077/devcamper_api#mongoose)
@@ -63,26 +70,26 @@ In GraphQL Playground add the http header as below, when testing protected GQL q
 | ㄴ ❓imports   |                                                    |
 | ❓Interceptors | @injectable()                                      |
 
-### Coding strategy 
+## Coding strategy 
   1. Write method in `Controller` (.controller.ts) 🡪 `What`'s the req and res 
   2. Write method in `Provider` (.service.ts) 🡪 `How` to impliment the logic like how to process datas from db and return them.
 
-### Decorator
+## Decorator
 - Decorator Factory -- when use, pass in para `@Logger('hi')`, which return decorator categorized as below 4 
     - Class decorator
     - Method decorator
     - Property decorator
     - Parameter decorator
 
-### keywords
+## keywords
 - Auth: JWT and base64
 - Auth: Session and Cookie and passport.js 
 - DTO:  Graphql and class-validator.js
 - Mongo: aggregate
 
-## Description
 
-Playing around with [Nest](https://github.com/nestjs/nest) framework
+
+# npm script
 
 ## Installation
 
