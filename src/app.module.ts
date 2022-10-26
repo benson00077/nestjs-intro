@@ -19,7 +19,7 @@ import { AuthModule } from './auth/auth.module';
     GraphQLModule.forRoot({
       autoSchemaFile: 'schema.gql',
       // CORS in GraphQl: https://docs.nestjs.com/security/cors#getting-started
-      cors: true,      
+      // cors: true,      
     }),
     PostsModule,
     PostStatisticsModule,
