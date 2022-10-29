@@ -59,6 +59,12 @@ export class ConfigService {
     return this.get('JWT_EXPIRES_TIME');
   }
 
+  public getAllowOrigins(): string[] {
+    // e.g. return ['http://localhost:3002', 'http://localhost:3000']
+    const ALLOW_ORIGINS = this.envConfig.ALLOW_ORIGIN.split(',');
+    return ALLOW_ORIGINS;
+  }
+
   private validateEnvFile(envConfig: EnvConfig): EnvConfig {
     const envVarsSchema = Joi.object({
       NODE_ENV: Joi.string()
@@ -76,10 +82,11 @@ export class ConfigService {
         : Joi.string().optional(),
       JWT_SECRET_KEY: Joi.string().required(),
       JWT_EXPIRES_TIME: Joi.number().required(),
+      ALLOW_ORIGIN: Joi.string(),
     });
 
     const { error, value } = envVarsSchema.validate(envConfig);
-    if (error) throw new Error(`Config validation error: ${error.message}`);
+    if (error) throw new Error(`Config validation error on env files: ${error.details[0].message}`);
     return value;
   }
 
