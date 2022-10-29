@@ -28,7 +28,8 @@ async function bootstrap() {
     // against XSS
     helmet({
       contentSecurityPolicy: NODE_ENV === 'production' ? undefined : false,
-      crossOriginEmbedderPolicy: false,
+      crossOriginEmbedderPolicy: false, // by default in Helmet v5.
+      hidePoweredBy: true, // by default in Helmet
     }),
   );
   // app.enableCors({});
