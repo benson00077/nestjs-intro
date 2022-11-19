@@ -10,6 +10,7 @@ const envTest = {
   JWT_EXPIRES_TIME: 1004,
   DATABASE_USER: 'testUser',
   DATABASE_PWD: 'testPwd',
+  ALLOW_ORIGIN: "http://localhost:3000,http://localhost:3002",
 };
 
 describe('ConfigService', () => {
@@ -47,4 +48,10 @@ describe('ConfigService', () => {
   it('should expose mongoDB URI', () => {
     expect(typeof service.getMongoURI()).toBe('string');
   });
+
+  it('should read getAllowOrigins as string[]', () => {
+    expect(service.getAllowOrigins()).toEqual(
+      expect.arrayContaining([expect.any(String)])
+    );
+  })
 });
