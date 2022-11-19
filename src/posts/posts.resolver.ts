@@ -50,7 +50,7 @@ export class PostsResolver {
   public async deletePostById(
     @Args({ name: 'id', type: () => ID }) id: string,
   ) {
-    return this.postsService.delteOneById(id);
+    return this.postsService.deleteOneById(id);
   }
 
   @Mutation(() => BatchDeleteModel)
