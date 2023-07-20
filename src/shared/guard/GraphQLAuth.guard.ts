@@ -18,17 +18,17 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
     return super.canActivate(context) as boolean;
   }
 
-  // docs: https://docs.nestjs.com/security/authentication#graphql
+  /**
+   * See docs: https://docs.nestjs.com/security/authentication#graphql
+   *  - http req headers should contain ... 
+   *    - "Authorization" : "Bearer <JWT>"
+   *    
+   *  - See req headers of any query/muation decorated by @UseGuards(JwtAuthGuard) by adding this : 
+   *    - console.log("GraphQLAuth.guard.ts -- req.headers -- ", ctx.getContext().req.headers)
+   */ 
   public getRequest(context: ExecutionContext) {
     const ctx = GqlExecutionContext.create(context);
-
-    /**
-     *  http req headers should contain ...
-     *    "Authorization" : "Bearer <JWT>"
-     *
-     *    See req headers of any query/muation decorated by @UseGuards(JwtAuthGuard) :
-     *    console.log("GraphQLAuth.guard.ts -- req.headers -- ", ctx.getContext().req.headers)
-     */
+    
 
     return ctx.getContext().req;
   }

@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { GraphQLValidation } from './shared/pipes/GraphQLValidation.pipe';
+import { GraphQLValidationPipe } from './shared/pipes/GraphQLValidation.pipe';
 import { parse } from 'dotenv';
 import { readFileSync } from 'fs';
 import * as favicon from 'serve-favicon';
@@ -33,6 +33,7 @@ async function bootstrap() {
     }),
   );
   // app.enableCors({});
+  //TODO: what if not using below pipe ?
   app.useGlobalPipes(new GraphQLValidation());
   await app.listen(APP_PORT || 3001);
 }

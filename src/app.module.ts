@@ -1,5 +1,7 @@
 import { Module } from '@nestjs/common';
-import { GraphqlModule } from './graphql/graphql.module';
+import { APP_PIPE } from '@nestjs/core'
+import { GraphQLModule } from '@nestjs/graphql';
+import { GraphQLValidationPipe } from './shared/pipes/GraphQLValidation.pipe'
 import { AppService } from './app.service';
 import { AppController } from './app.controller';
 import { ConfigModule } from './config/config.module';
@@ -21,6 +23,12 @@ import { AuthModule } from './auth/auth.module';
     // ProductModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+  //   {
+  //     provide: APP_PIPE,
+  //     useClass: GraphQLValidationPipe,
+  //   },
+  ],
 })
 export class AppModule {}
