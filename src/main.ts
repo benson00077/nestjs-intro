@@ -34,7 +34,7 @@ async function bootstrap() {
   );
   // app.enableCors({});
   //TODO: what if not using below pipe ?
-  app.useGlobalPipes(new GraphQLValidation());
+  app.useGlobalPipes(new GraphQLValidationPipe());
   await app.listen(APP_PORT || 3001);
 }
 bootstrap();

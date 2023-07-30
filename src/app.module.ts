@@ -1,7 +1,5 @@
 import { Module } from '@nestjs/common';
-import { APP_PIPE } from '@nestjs/core'
-import { GraphQLModule } from '@nestjs/graphql';
-import { GraphQLValidationPipe } from './shared/pipes/GraphQLValidation.pipe'
+import { GraphqlModule } from './graphql/graphql.module';
 import { AppService } from './app.service';
 import { AppController } from './app.controller';
 import { ConfigModule } from './config/config.module';
