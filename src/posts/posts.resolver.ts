@@ -11,6 +11,7 @@ import { BatchDeleteModel } from 'src/database/models/batch-delete.model';
 import { CreatePostInput } from './dtos/create-post.input';
 import { PaginationInput } from './dtos/pagination.input';
 import { UpdatePostInput } from './dtos/update-post.input';
+import { UpdatePostsInput } from './dtos/update-posts.input';
 
 @Resolver(() => Post)
 export class PostsResolver {
@@ -43,6 +44,12 @@ export class PostsResolver {
   @UseGuards(JwtAuthGuard)
   public async updatePostById(@Args('input') input: UpdatePostInput) {
     return this.postsService.update(input);
+  }
+
+  @Mutation(() => [Post])
+  @UseGuards(JwtAuthGuard)
+  public async updatePostsByIds(@Args('input') input: UpdatePostsInput) {
+    return this.postsService.updateMany(input.posts)
   }
 
   @Mutation(() => Post)

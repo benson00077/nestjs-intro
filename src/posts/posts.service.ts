@@ -12,13 +12,14 @@ import { CreatePostInput } from './dtos/create-post.input';
 import { PaginationInput } from './dtos/pagination.input';
 import { ForbiddenError } from 'apollo-server-errors';
 import { UpdatePostInput } from './dtos/update-post.input';
+import { UpdatePostsInput } from './dtos/update-posts.input';
 
 @Injectable()
 export class PostsService {
   constructor(
     @InjectModel('Post')
     private readonly postModel: Model<PostDocument>,
-  ) {}
+  ) { }
 
   private async getTatalCount(): Promise<number> {
     return this.postModel.countDocuments();
@@ -97,6 +98,17 @@ export class PostsService {
   public async update(postInput: UpdatePostInput): Promise<Post> {
     const { id, ...rest } = postInput;
     return this.postModel.findByIdAndUpdate(id, rest, { new: true });
+  }
+
+  /**
+   *  FIXME: N + 1 problem. 
+   *  \_ should use aggregate pipeline, ref: https://stackoverflow.com/questions/56752249/mongodb-how-to-update-array-of-objects-with-id-and-updated-values/74561802#74561802
+   */
+  public async updateMany(postsInput: UpdatePostsInput['posts']): Promise<Post[]> {
+    const udpatePromises = postsInput.map(async (post) => this.update(post))
+    const updatePosts = await Promise.all(udpatePromises)
+    console.log(updatePosts)
+    return updatePosts
   }
 
   public async deleteOneById(id: string): Promise<Post> {
