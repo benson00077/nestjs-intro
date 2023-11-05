@@ -99,6 +99,7 @@ input LoginInput {
 type Mutation {
   createPost(input: CreatePostInput!): Post!
   updatePostById(input: UpdatePostInput!): Post!
+  updatePostsByIds(input: UpdatePostsInput!): [Post!]!
   deletePostById(id: ID!): Post!
   deletePosts(ids: [ID!]!): BatchDeleteModel!
   updatePV(id: ID!): Post!
@@ -131,6 +132,10 @@ input UpdatePostInput {
   pv: Float
   lastModifiedDate: DateTime
   isPublic: Boolean
+}
+
+input UpdatePostsInput {
+  posts: [UpdatePostInput!]!
 }
 
 input CreatePostStatisticsInput {

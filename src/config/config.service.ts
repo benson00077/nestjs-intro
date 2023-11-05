@@ -62,6 +62,7 @@ export class ConfigService {
   public getAllowOrigins(): string[] {
     // e.g. return ['http://localhost:3002', 'http://localhost:3000']
     const ALLOW_ORIGINS = this.envConfig.ALLOW_ORIGIN.split(',');
+    console.log("    Allow Origins: ", ALLOW_ORIGINS)
     return ALLOW_ORIGINS;
   }
 
